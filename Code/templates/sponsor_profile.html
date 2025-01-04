@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/sponsor-dashboard">Dashboard</a>
+                <a href="/sponsor/profile">Profile</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <h1>Sponsor Profile</h1>
+    <p>Username: {{ sponsor.username }}</p>
+    <p>Email: {{ sponsor.email }}</p>
+    <p>Company Name: {{ sponsor.company_name }}</p>
+    <p>Industry: {{ sponsor.industry }}</p>
+    <p>Budget: {{ sponsor.budget }}</p>
+    <a href="{{ url_for('edit_sponsor_profile') }}">Edit Profile</a>
+</body>
+</html>

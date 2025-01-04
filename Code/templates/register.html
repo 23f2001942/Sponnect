@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdFusion - Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/login">Login</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Select Your Role to Register</h1>
+        <div>
+            <a href="/admin-register"><button>Register as Admin</button></a>
+            <a href="/sponsor-register"><button>Register as Sponsor</button></a>
+            <a href="/influencer-register"><button>Register as Influencer</button></a>
+        </div>
+    </main>
+</body>
+</html>

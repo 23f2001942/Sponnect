@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Campaigns</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/admin-dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Campaigns</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Budget</th>
+                    <th>Industry</th>
+                    <th>Public</th>
+                    <th>Sponsor ID</th>
+                    <th>Flagged</th> <!-- New column for flagged status -->
+                    <th>Actions</th> <!-- Column for actions -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for campaign in campaigns %}
+                <tr>
+                    <td>{{ campaign.id }}</td>
+                    <td>{{ campaign.name }}</td>
+                    <td>{{ campaign.description }}</td>
+                    <td>{{ campaign.budget }}</td>
+                    <td>{{ campaign.industry }}</td>
+                    <td>{{ campaign.public }}</td>
+                    <td>{{ campaign.sponsor_id }}</td>
+                    <td>
+                        {% if campaign.flagged %}
+                            <span>Flagged</span>
+                        {% else %}
+                            <form action="{{ url_for('flag_campaign', campaign_id=campaign.id) }}" method="post" style="display:inline;">
+                                <button type="submit">Flag</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

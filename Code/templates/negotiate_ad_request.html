@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negotiate Ad Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="{{ url_for('influencer_profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Negotiate Ad Request</h1>
+        <form action="{{ url_for('submit_negotiation', ad_request_id=ad_request.id) }}" method="post">
+            <label for="negotiation_terms">Your Negotiation Terms:</label>
+            <textarea name="negotiation_terms" id="negotiation_terms" required></textarea>
+            <button type="submit">Submit Negotiation</button>
+        </form>
+    </main>
+</body>
+</html>

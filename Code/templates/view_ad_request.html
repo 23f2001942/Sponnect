@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Ad Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Ad Request Details</h1>
+    <table>
+        <tr>
+            <th>Campaign</th>
+            <td>{{ ad_request.campaign.name }}</td>
+        </tr>
+        <tr>
+            <th>Influencer</th>
+            <td>{{ ad_request.influencer.username }}</td>
+        </tr>
+        <tr>
+            <th>Messages</th>
+            <td>{{ ad_request.messages }}</td>
+        </tr>
+        <tr>
+            <th>Requirements</th>
+            <td>{{ ad_request.requirements }}</td>
+        </tr>
+        <tr>
+            <th>Payment Amount</th>
+            <td>{{ ad_request.payment_amount }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ ad_request.status }}</td>
+        </tr>
+        <tr>
+            <th>Negotiation Terms</th>
+            <td>{{ ad_request.negotiation_terms }}</td>
+        </tr>
+    </table>
+    {% if 'user_id' in session %}
+        {% if session['role'] == 'sponsor' %}
+            <a href="{{ url_for('sponsor_dashboard') }}"><button>Back to Sponsor Dashboard</button></a>
+        {% elif session['role'] == 'influencer' %}
+            <a href="{{ url_for('influencer_dashboard') }}"><button>Back to Influencer Dashboard</button></a>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

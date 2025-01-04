@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/register">Register</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Select Your Role</h1>
+        <div>
+            <a href="/admin-login"><button>Admin Login</button></a>
+            <a href="/sponsor-login"><button>Sponsor Login</button></a>
+            <a href="/influencer-login"><button>Influencer Login</button></a>
+        </div>
+    </main>
+</body>
+</html>

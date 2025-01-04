@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AdFusion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Admin Dashboard</h1>
+        <div>
+            <a href="{{ url_for('admin_users') }}"><button>Users</button></a>
+            <a href="{{ url_for('admin_campaigns') }}"><button>Campaigns</button></a>
+            <a href="{{ url_for('admin_ad_requests') }}"><button>Ad Requests</button></a>
+        </div>
+    </main>
+</body>
+</html>

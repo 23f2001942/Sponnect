@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-right">
+                <a href="/influencer-dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <h1>Influencer Profile</h1>
+    <p>Username: {{ influencer.username }}</p>
+    <p>Email: {{ influencer.email }}</p>
+    <p>Name: {{ influencer.name }}</p>
+    <p>Category: {{ influencer.category }}</p>
+    <p>Niche: {{ influencer.niche }}</p>
+    <p>Reach: {{ influencer.reach }}</p>
+    <a href="{{ url_for('edit_influencer_profile') }}">Edit Profile</a>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Dashboard - AdFusion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-center">
+                <a href="{{ url_for('create_campaign') }}">Create New Campaign</a>
+            </div>
+            <div class="nav-right">
+                <a href="{{ url_for('sponsor_profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>            
+        </nav>
+    </header>
+    <main>
+        <h1>Sponsor Dashboard</h1>
+        <h2>Your Campaigns</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+                <th>Visibility</th>
+                <th>Actions</th>
+            </tr>
+            {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.name }}</td>
+                <td>{{ campaign.description }}</td>
+                <td>{{ campaign.start_date.strftime('%d-%m-%Y') }}</td>
+                <td>{{ campaign.end_date.strftime('%d-%m-%Y') }}</td>
+                <td>{{ campaign.budget }}</td>
+                <td>{{ campaign.visibility }}</td>
+                <td>
+                    <a href="{{ url_for('edit_campaign', campaign_id=campaign.id) }}"><button>Edit</button></a>
+                    <form action="{{ url_for('delete_campaign', campaign_id=campaign.id) }}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <a href="{{ url_for('create_ad_request', campaign_id=campaign.id) }}"><button>Create Ad Request</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr width="100%" size="2">
+        <h2>Ad Requests</h2>
+        <table>
+            <tr>
+                <th>Campaign</th>
+                <th>Influencer</th>
+                <th>Messages</th>
+                <th>Requirements</th>
+                <th>Payment Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for ad_request in ad_requests %}
+            <tr>
+                <td>{{ ad_request.campaign.name }}</td>
+                <td>{{ ad_request.influencer.username }}</td>
+                <td>{{ ad_request.messages }}</td>
+                <td>{{ ad_request.requirements }}</td>
+                <td>{{ ad_request.payment_amount }}</td>
+                <td>{{ ad_request.status }}</td>
+                <td>
+                    <a href="{{ url_for('view_ad_request', ad_request_id=ad_request.id) }}"><button>View Details</button></a>
+                    {% if ad_request.status == 'Negotiation' %}
+                    <form action="{{ url_for('handle_negotiation', ad_request_id=ad_request.id) }}" method="post" style="display:inline;">
+                        <button type="submit" name="action" value="accept">Accept Negotiation</button>
+                        <button type="submit" name="action" value="reject">Reject Negotiation</button>
+                        <p>Negotiation Terms: {{ ad_request.negotiation_terms }}</p>
+                    </form>
+                    {% else %}
+                    <a href="{{ url_for('edit_ad_request', ad_request_id=ad_request.id) }}"><button>Edit</button></a>
+                    <form action="{{ url_for('delete_ad_request', ad_request_id=ad_request.id) }}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                    {% endif %}
+                </td>                
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+</body>
+</html>

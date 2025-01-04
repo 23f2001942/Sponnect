@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">Home</a>
+            </div>
+            <div class="nav-center">
+                <a href="/influencer/campaigns">Campaigns</a>
+            </div>
+            <div class="nav-right">
+                <a href="{{ url_for('influencer_profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Influencer Dashboard</h1>
+        <h2>Ad Requests</h2>
+        <table>
+            <tr>
+                <th>Campaign</th>
+                <th>Sponsor</th>
+                <th>Messages</th>
+                <th>Requirements</th>
+                <th>Payment Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for ad_request in ad_requests %}
+            <tr>
+                <td>{{ ad_request.campaign.name }}</td>
+                <td>{{ ad_request.campaign.sponsor.username }}</td>
+                <td>{{ ad_request.messages }}</td>
+                <td>{{ ad_request.requirements }}</td>
+                <td>{{ ad_request.payment_amount }}</td>
+                <td>{{ ad_request.status }}</td>
+                <td>
+                    <a href="{{ url_for('view_ad_request', ad_request_id=ad_request.id) }}"><button>View Details</button></a>
+                    {% if ad_request.status == 'Pending' %}
+                    <form action="{{ url_for('ad_request_action', ad_request_id=ad_request.id) }}" method="post" style="display:inline;">
+                        <button type="submit" name="action" value="accept">Accept</button>
+                        <button type="submit" name="action" value="reject">Reject</button>
+                        <a href="{{ url_for('negotiate_ad_request', ad_request_id=ad_request.id) }}"><button type="button">Negotiate</button></a>
+                    </form>
+                    {% elif ad_request.status == 'Negotiation' %}
+                    <span>Negotiation Sent</span>
+                    {% else %}
+                    <span>{{ ad_request.status }}</span>
+                    {% endif %}
+                </td>                
+            </tr>
+            {% endfor %}
+        </table>
+    </main>
+</body>
+</html>
