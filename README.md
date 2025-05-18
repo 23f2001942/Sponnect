@@ -2,8 +2,7 @@
 
 **Connecting Sponsors and Influencers for Effective Brand Collaborations**  
 A full-stack web application built using **Flask** and **SQLite**
-Developed as part of the **Modern Application Development I** course  
-(IIT Madras BS in Data Science and Applications)
+Developed as part of the **Modern Application Development I** course  (IIT Madras BS in Data Science and Applications)
 
 ---
 
